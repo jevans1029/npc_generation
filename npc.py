@@ -21,14 +21,18 @@ class Action(BaseModel):
     effect: str
 
 
-class SpellList(BaseModel):
-    at_will: Optional[List[str]]
+class Spellcasting(BaseModel):
+    details: str
     cantrips: Optional[List[str]]
     level_1: Optional[List[str]]
     level_2: Optional[List[str]]
     level_3: Optional[List[str]]
     level_4: Optional[List[str]]
     level_5: Optional[List[str]]
+    level_6: Optional[List[str]]
+    level_7: Optional[List[str]]
+    level_8: Optional[List[str]]
+    level_9: Optional[List[str]]
 
 
 class SpecialAbility(BaseModel):
@@ -49,13 +53,15 @@ class Npc(BaseModel):
     movement_speed: str
     abilities: Abilities
     hitpoints: str
-    condition_immunities: str
+    condition_immunities: Optional[str]=""
+    damage_immunities: Optional[str]=""
+    damage_resistances: Optional[str]=""
     senses: str
     languages: str
     proficiency_bonus: int
     saving_throw_proficiencies: List[str]
     skill_proficiencies: List[str]
-    spell_list: Optional[SpellList]=None
+    spellcasting: Optional[Spellcasting]=None
     special_abilities: Optional[List[SpecialAbility]]
     actions: List[Action]
     bonus_actions: Optional[List[Action]]

@@ -1,5 +1,3 @@
-import os
-import json
 from dotenv import load_dotenv
 from openai import OpenAI
 from npc import Npc

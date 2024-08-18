@@ -6,6 +6,7 @@ def build_stat_block(npc: Npc):
     actions = build_actions(npc)
     legendary_actions = build_legendary_actions(npc)
     bonus_actions = build_bonus_actions(npc)
+    spellcasting = build_spellcasting(npc)
     page = f"""
 ## {npc.name}
 *{npc.creature_type}*
@@ -19,11 +20,14 @@ ___
 |{npc.abilities.strength}|{npc.abilities.dexterity}|{npc.abilities.constitution}|{npc.abilities.intelligence}|{npc.abilities.wisdom}|{npc.abilities.charisma}|
 ___
 **Condition Immunities** :: {npc.condition_immunities}
+**Damage Immunities**    :: {npc.damage_immunities}
+**Damage Resistances**   :: {npc.damage_resistances}
 **Senses**               :: {npc.senses}
 **Languages**            :: {npc.languages}
 **Challenge**            :: {npc.challenge_rating}
 ___
 {abilities}
+{spellcasting}
 ### Actions
 {actions}
 {bonus_actions}
@@ -69,6 +73,36 @@ def build_bonus_actions(npc: Npc):
         return actions
     else:
         return ""
+
+
+def build_spellcasting(npc: Npc):
+
+    if not npc.spellcasting:
+        return ""
+    spellcasting = npc.spellcasting
+    result = f"***Spellcasting*** {spellcasting.details}\n"
+    if spellcasting.cantrips:
+        result += f"::*Cantrips* {', '.join(spellcasting.cantrips)}\n"
+    if spellcasting.level_1:
+        result += f"::*Level 1* {', '.join(spellcasting.level_1)}\n"
+    if spellcasting.level_2:
+        result += f"::*Level 2* {', '.join(spellcasting.level_2)}\n"
+    if spellcasting.level_3:
+        result += f"::*Level 3* {', '.join(spellcasting.level_3)}\n"
+    if spellcasting.level_4:
+        result += f"::*Level 4* {', '.join(spellcasting.level_4)}\n"
+    if spellcasting.level_5:
+        result += f"::*Level 5* {', '.join(spellcasting.level_5)}\n"
+    if spellcasting.level_6:
+        result += f"::*Level 6* {', '.join(spellcasting.level_6)}\n"
+    if spellcasting.level_7:
+        result += f"::*Level 7* {', '.join(spellcasting.level_7)}\n"
+    if spellcasting.level_8:
+        result += f"::*Level 8* {', '.join(spellcasting.level_8)}\n"
+    if spellcasting.level_9:
+        result += f"::*Level 9* {', '.join(spellcasting.level_9)}\n"
+    result += ":\n"
+    return result
 
 
 def build_legendary_actions(npc: Npc):
