@@ -22,6 +22,7 @@ class Action(BaseModel):
 
 
 class Spellcasting(BaseModel):
+    spell_slots: str
     details: str
     cantrips: Optional[List[str]]
     level_1: Optional[List[str]]

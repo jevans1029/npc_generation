@@ -1,3 +1,4 @@
+from pathlib import Path
 from npc import Npc
 
 
@@ -34,8 +35,9 @@ ___
 {legendary_actions}
 
 """
-
-    with open("monster.txt", "w") as f:
+    Path("npcs").mkdir(exist_ok=True)
+    file_name = f"npcs\\{npc.name}"
+    with open(file_name, "w") as f:
         f.write("{{monster,frame")
         f.write(page)
         f.write("}}")
@@ -81,6 +83,7 @@ def build_spellcasting(npc: Npc):
         return ""
     spellcasting = npc.spellcasting
     result = f"***Spellcasting*** {spellcasting.details}\n"
+    result += f"::*Spell slots* {spellcasting.spell_slots}\n"
     if spellcasting.cantrips:
         result += f"::*Cantrips* {', '.join(spellcasting.cantrips)}\n"
     if spellcasting.level_1:
